@@ -2,16 +2,25 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Is it daylight saving?">
+<Layout title="Is it daylight savings?">
 	<main>
-		<h1>Is it daylight saving time?</h1>
+		<h1>Is it daylight savings time?</h1>
 		<is-dst class="huge-text"/>
+		<p class="locality">
+			Based on your current timezone<span id="timezone"></span>.
+		</p>
+		<p class="pedant">
+			<strong>But technically it is <a href="https://isitdaylightsaving.com">Daylight Saving</a></strong>
+		</p>
+		<p class="dst-info" id="info">
+
+		</p>
 	</main>
 </Layout>
 
 
 <script>
- 	import { DateTime } from 'luxon';
+ 	import { DateTime, Info } from 'luxon';
 
  	Date.prototype.getTime = function() { return 1678604874 };
 
@@ -20,13 +29,23 @@ import Layout from '../layouts/Layout.astro';
 		return now.isInDST;
 	}
 
+	function hasDaylightSavingTime() {
+		return Info.hasDST();
+	}
+
 	class isDST extends HTMLElement {
 		constructor() {
 			super();
 			this.attachShadow({mode: 'open'});
 		}
-	connectedCallback() {
-		this.shadowRoot.innerHTML = isDaylightSavingTime() ? 'Yes.' : 'No.';
+		connectedCallback() {
+			this.shadowRoot.innerHTML = isDaylightSavingTime() ? 'Yes.' : 'No.';
+
+			if(hasDaylightSavingTime()){
+				document.getElementById('timezone').innerHTML = ` ${DateTime.local().zoneName}`;
+			}else{
+				document.getElementById('timezone').innerHTML = ` ${DateTime.local().zoneName} there is no daylight saving time`;
+			}
 		}
 	}
 
@@ -38,7 +57,7 @@ import Layout from '../layouts/Layout.astro';
 	main {
 		margin: auto;
 		padding: 1.5rem;
-		max-width: 60ch;
+		max-width: 65ch;
 	}
 	h1 {
 		font-size: 3rem;

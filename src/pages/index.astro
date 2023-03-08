@@ -28,17 +28,16 @@ import Layout from '../layouts/Layout.astro';
 			}
 
 		function hasDaylightSavingTime() {
-			return Info.hasDST();
-			}
+		return Info.hasDST();
+	}
 
-		class isDST extends HTMLElement {
-			constructor() {
-				super();
-				this.attachShadow({mode: 'open'});
-				}
-			connectedCallback() {
-				this.shadowRoot.innerHTML = isDaylightSavingTime() ? 'Yes.' : 'No.';
-				this.classList.add(isDaylightSavingTime() ? 'yes' : 'no');
+	class isDST extends HTMLElement {
+		constructor() {
+			super();
+			this.attachShadow({mode: 'open'});
+		}
+		connectedCallback() {
+			this.shadowRoot.innerHTML = isDaylightSavingTime() ? 'Yes.' : 'No.';this.classList.add(isDaylightSavingTime() ? 'yes' : 'no');
 
 				if(hasDaylightSavingTime()){
 					document.getElementById('timezone').innerHTML = ` ${DateTime.local().zoneName}`;
@@ -47,7 +46,13 @@ import Layout from '../layouts/Layout.astro';
 					}
 				}
 
+			if(hasDaylightSavingTime()){
+				document.getElementById('timezone').innerHTML = ` ${DateTime.local().zoneName}`;
+			}else{
+				document.getElementById('timezone').innerHTML = ` ${DateTime.local().zoneName} there is no daylight saving time`;
 			}
+		}
+	}
 
 
 		customElements.define('is-dst', isDST);

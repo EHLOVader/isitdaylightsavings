@@ -39,13 +39,6 @@ import Layout from '../layouts/Layout.astro';
 		connectedCallback() {
 			this.shadowRoot.innerHTML = isDaylightSavingTime() ? 'Yes.' : 'No.';this.classList.add(isDaylightSavingTime() ? 'yes' : 'no');
 
-				if(hasDaylightSavingTime()){
-					document.getElementById('timezone').innerHTML = ` ${DateTime.local().zoneName}`;
-					}else{
-					document.getElementById('timezone').innerHTML = ` ${DateTime.local().zoneName} there is no daylight saving time`;
-					}
-				}
-
 			if(hasDaylightSavingTime()){
 				document.getElementById('timezone').innerHTML = ` ${DateTime.local().zoneName}`;
 			}else{

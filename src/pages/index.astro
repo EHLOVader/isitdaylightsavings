@@ -20,16 +20,14 @@ import Layout from '../layouts/Layout.astro';
 
 
 <script>
- 	import { DateTime, Info } from 'luxon';
+	import { DateTime, Info } from 'luxon';
 
- 	Date.prototype.getTime = function() { return 1678604874 };
+		function isDaylightSavingTime() {
+			const now = DateTime.local();
+			return now.isInDST;
+			}
 
-	function isDaylightSavingTime() {
-		const now = DateTime.local();
-		return now.isInDST;
-	}
-
-	function hasDaylightSavingTime() {
+		function hasDaylightSavingTime() {
 		return Info.hasDST();
 	}
 
@@ -39,7 +37,14 @@ import Layout from '../layouts/Layout.astro';
 			this.attachShadow({mode: 'open'});
 		}
 		connectedCallback() {
-			this.shadowRoot.innerHTML = isDaylightSavingTime() ? 'Yes.' : 'No.';
+			this.shadowRoot.innerHTML = isDaylightSavingTime() ? 'Yes.' : 'No.';this.classList.add(isDaylightSavingTime() ? 'yes' : 'no');
+
+				if(hasDaylightSavingTime()){
+					document.getElementById('timezone').innerHTML = ` ${DateTime.local().zoneName}`;
+					}else{
+					document.getElementById('timezone').innerHTML = ` ${DateTime.local().zoneName} there is no daylight saving time`;
+					}
+				}
 
 			if(hasDaylightSavingTime()){
 				document.getElementById('timezone').innerHTML = ` ${DateTime.local().zoneName}`;
@@ -50,7 +55,8 @@ import Layout from '../layouts/Layout.astro';
 	}
 
 
-	customElements.define('is-dst', isDST);
+		customElements.define('is-dst', isDST);
+
 
 </script>
 <style>
@@ -58,6 +64,9 @@ import Layout from '../layouts/Layout.astro';
 		margin: auto;
 		padding: 1.5rem;
 		max-width: 65ch;
+		flex-direction: column;
+		display: flex;
+		align-items: center;
 	}
 	h1 {
 		font-size: 3rem;

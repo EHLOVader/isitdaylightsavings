@@ -727,6 +727,11 @@ base64-js@^1.3.1:
   resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.5.1.tgz#1b1b440160a5bf7ad40b650f095963481903930a"
   integrity sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==
 
+big-text.js@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/big-text.js/-/big-text.js-1.0.1.tgz#485408d70053fc659abc65bb7546bcb2f2fa4b75"
+  integrity sha512-4jjqUxwvLHqA8g7UkK+oCltCKKVy2WTI7TbTpOqfP7EGCAmg/wItQJ62ry2ozPfXL7iDyKAAx2gN0v8Xlfo2Sg==
+
 bl@^5.0.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/bl/-/bl-5.1.0.tgz#183715f678c7188ecef9fe475d90209400624273"

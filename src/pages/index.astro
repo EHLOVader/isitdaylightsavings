@@ -59,7 +59,7 @@ import Layout from '../layouts/Layout.astro';
 
 
 </script>
-<style>
+<style lang="scss">
 	main {
 		margin: auto;
 		padding: 1.5rem;
@@ -77,5 +77,10 @@ import Layout from '../layouts/Layout.astro';
 		font-family: Impact, sans-serif;
 		font-size: 20rem;
 		font-weight: 800;
+
+		@media(max-width: 600px) {
+			font-size: 10rem;
+		}
 	}
+
 </style>
